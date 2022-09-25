@@ -26,18 +26,27 @@ public class AlienController {
     }
     @GetMapping("/getAlien")
     public ModelAndView getAlien(@RequestParam int aid){
-        ModelAndView alien=new ModelAndView("showAlien.jsp");
+        ModelAndView mv=new ModelAndView("showAlien.jsp");
         Alien alien1= repo.findById(aid).orElse(new Alien());
-        alien.addObject("alien1",alien1);
-        return alien;
+        mv.addObject("alien1",alien1);
+        return mv;
     }
 
     @GetMapping("/deleteAlien")
     public ModelAndView deleteAlien(@RequestParam int aid){
-        ModelAndView alien=new ModelAndView("deleteAlien.jsp");
+        ModelAndView mv=new ModelAndView("deleteAlien.jsp");
         Alien alien1= repo.findById(aid).orElse(new Alien());
         repo.deleteById(aid);
-        alien.addObject("alien1",alien1);
-        return alien;
+        mv.addObject("alien1",alien1);
+        return mv;
+    }
+
+    @GetMapping("/updateAlien")
+    public ModelAndView updateAlien(Alien alien){
+        ModelAndView mv=new ModelAndView("updateAlien.jsp");
+        Alien alien1= repo.findById(alien.getAid()).orElse(new Alien());
+        repo.deleteById(alien.getAid());
+        mv.addObject("alien1",alien1);
+        return mv;
     }
 }

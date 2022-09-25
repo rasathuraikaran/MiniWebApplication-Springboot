@@ -47,5 +47,22 @@
 
 
 </form>
+
+
+<br>
+<br>
+<h1 >Update Alien information</h1>
+
+
+<form action="updateAlien" >
+    Enter Your Id  <input type="text" name="aid"><br>
+    <input type="submit" ><br>
+
+
+
+
+
+
+</form>
 </body>
 </html>
