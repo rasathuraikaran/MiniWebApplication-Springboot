@@ -9,6 +9,6 @@
 
 <h2>Display the Alien Info</h2>
 
-<h3>${alien1}</h3>
+<h3>${alien1.aname} okojo</h3>
 </body>
 </html>

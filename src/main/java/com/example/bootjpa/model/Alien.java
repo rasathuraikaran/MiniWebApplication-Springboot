@@ -6,8 +6,18 @@ import javax.persistence.Id;
 @Entity
 public class Alien {
     @Id
+    private String tech;
     private int aid;
-     private String aname;
+    private String aname;
+
+    public String getTech() {
+        return tech;
+    }
+
+    public void setTech(String tech) {
+        this.tech = tech;
+    }
+
 
     public int getAid() {
         return aid;

@@ -1,0 +1,1 @@
+insert into ALIEN (101,'karan');
