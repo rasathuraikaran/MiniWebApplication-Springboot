@@ -6,17 +6,13 @@ import javax.persistence.Id;
 @Entity
 public class Alien {
     @Id
-    private String tech;
     private int aid;
     private String aname;
 
-    public String getTech() {
-        return tech;
+    public Alien() {
     }
 
-    public void setTech(String tech) {
-        this.tech = tech;
-    }
+
 
 
     public int getAid() {

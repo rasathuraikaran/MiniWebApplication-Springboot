@@ -12,9 +12,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class AlienController {
     @Autowired
     AlienRepo repo;
-@RequestMapping("/home")
-    public String home(){
-        return "home.jsp";
+@GetMapping("/home")
+    public String home() throws Exception {
+    handleBusinessLogic();
+    return "home.jsp";
     }
 
 
@@ -48,5 +49,10 @@ public class AlienController {
         repo.deleteById(alien.getAid());
         mv.addObject("alien1",alien1);
         return mv;
+    }
+
+
+    private void handleBusinessLogic() throws Exception {
+    throw  new Exception("Error");
     }
 }
