@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -13,8 +14,8 @@ public class AlienController {
     @Autowired
     AlienRepo repo;
 @GetMapping("/home")
-    public String home() throws Exception {
-    handleBusinessLogic();
+    public String home()  {
+
     return "home.jsp";
     }
 
@@ -25,12 +26,10 @@ public class AlienController {
     repo.save(alien);
     return "home.jsp";
     }
-    @GetMapping("/getAlien")
-    public ModelAndView getAlien(@RequestParam int aid){
-        ModelAndView mv=new ModelAndView("showAlien.jsp");
-        Alien alien1= repo.findById(aid).orElse(new Alien());
-        mv.addObject("alien1",alien1);
-        return mv;
+    @GetMapping("/aliens")
+            @ResponseBody
+    public String getAlien(@RequestParam int aid){
+       return repo.findAll().toString();
     }
 
     @GetMapping("/deleteAlien")
@@ -52,7 +51,5 @@ public class AlienController {
     }
 
 
-    private void handleBusinessLogic() throws Exception {
-    throw  new Exception("Error");
-    }
+
 }

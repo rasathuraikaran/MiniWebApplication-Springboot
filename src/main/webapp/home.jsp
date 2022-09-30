@@ -22,7 +22,7 @@
 <h1 >Display Alien information</h1>
 
 
-<form action="getAlien" >
+<form action="aliens" >
     Enter Your Id  <input type="text" name="aid"><br>
     <input type="submit" ><br>
 
