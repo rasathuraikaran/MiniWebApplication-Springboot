@@ -3,13 +3,13 @@ import com.example.bootjpa.dao.AlienRepo;
 import com.example.bootjpa.model.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
 public class AlienController {
     @Autowired
     AlienRepo repo;
@@ -21,15 +21,20 @@ public class AlienController {
 
 
 
-    @RequestMapping("/addAlien")
-    public String addAlien(Alien alien){
+    @PostMapping("/alien")
+    public Alien addAlien( @RequestBody Alien alien){
     repo.save(alien);
-    return "home.jsp";
+    return alien;
     }
-    @GetMapping("/aliens")
-            @ResponseBody
-    public String getAlien(@RequestParam int aid){
-       return repo.findAll().toString();
+    @RequestMapping ("/aliens")
+    public List<Alien> getAlien(){
+       return repo.findAll();
+    }
+
+    @GetMapping("/alien/{aid}")
+
+    public Optional<Alien> getAliens(@PathVariable("aid") int aid){
+        return repo.findById(aid);
     }
 
     @GetMapping("/deleteAlien")
@@ -41,8 +46,16 @@ public class AlienController {
         return mv;
     }
 
+    @DeleteMapping("/alien/{aid}")
+    public String delesteAlien(@PathVariable int aid){
+    Alien a=repo.getOne(aid);
+    repo.delete(a);
+    return "Deleted";
+
+    }
+
     @GetMapping("/updateAlien")
-    public ModelAndView updateAlien(Alien alien){
+    public ModelAndView updatesAlien(Alien alien){
         ModelAndView mv=new ModelAndView("updateAlien.jsp");
         Alien alien1= repo.findById(alien.getAid()).orElse(new Alien());
         repo.deleteById(alien.getAid());
@@ -50,6 +63,10 @@ public class AlienController {
         return mv;
     }
 
-
+    @PutMapping("/alien")
+    public Alien updateAlien( @RequestBody Alien alien){
+        repo.save(alien);
+        return alien;
+    }
 
 }
